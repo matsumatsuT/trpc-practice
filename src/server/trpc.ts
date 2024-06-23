@@ -1,11 +1,9 @@
 import { initTRPC } from "@trpc/server";
 
-// Avoid exporting the entire t-object
-// since it's not very descriptive.
-// For instance, the use of a t variable
-// is common in i18n libraries.
+// trpcの初期化（一つのプロダクトに一度だけ実行）
 const t = initTRPC.create();
 
-// Base router and procedure helpers
+// 使用しやすいようにexportしてる
 export const router = t.router;
 export const procedure = t.procedure;
+export const createCallerFactory = t.createCallerFactory;

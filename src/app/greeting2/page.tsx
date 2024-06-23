@@ -1,7 +1,7 @@
 import { serverApi } from "@/app/_trpc/server-api";
 
 const GreeTing2 = async () => {
-  const greeting2 = await serverApi.greeting2({ name: "Next" });
+  const greeting2 = await serverApi.greeting2({ name: "aaa" });
 
   return (
     <div className="">
