@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { procedure, router } from "./trpc";
+import { callerFactory, procedure, router } from "./trpc";
 
 // routerを使用してエンドポイントを定義
 // procedureを使用して処理を実装する
@@ -14,3 +14,5 @@ export const appRouter = router({
 });
 
 export type AppRouter = typeof appRouter;
+
+export const createCaller = callerFactory(appRouter);

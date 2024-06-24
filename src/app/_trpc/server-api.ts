@@ -1,11 +1,15 @@
 import { httpBatchLink } from "@trpc/client";
 
 import { appRouter } from "@/server";
+import { router } from "@/server/trpc";
+import { createServerSideHelpers } from "@trpc/react-query/server";
 
-export const serverApi = appRouter.createCaller({
-  links: [
-    httpBatchLink({
-      url: "http://localhost:3003/api/trpc",
-    }),
-  ],
-});
+// https://trpc.io/docs/server/context
+// server側うまく動かない
+
+//　必要なさそう（ よくわからん）
+
+// export const serverApi = createServerSideHelpers({
+//   router: appRouter,
+//   ctx: {},
+// });
