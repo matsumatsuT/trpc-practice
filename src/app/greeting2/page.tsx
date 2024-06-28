@@ -6,8 +6,6 @@ const GreeTing2 = async () => {
   const caller = createCaller({});
   const data = await caller.greeting1();
 
-  console.log("data", data);
-
   return (
     <div className="">
       <div className="bg-blue-100 p-5 border-2 border-blue-500">
