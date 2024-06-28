@@ -11,7 +11,14 @@ export const appRouter = router({
   greeting2: procedure.input(z.object({ name: z.string() })).query((opts) => {
     return { msg: `Hello ${opts.input.name ?? "World"}` };
   }),
+  getPosts: procedure.query(async () => {
+    const env = process.env.ENDPOINT;
+    const res = await fetch(`${env}/posts`);
+    return res.json();
+  }),
 });
+
+const getPosts = async () => {};
 
 export type AppRouter = typeof appRouter;
 
