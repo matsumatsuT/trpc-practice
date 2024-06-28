@@ -4,7 +4,9 @@ import { createCaller } from "@/server";
 
 const GreeTing2 = async () => {
   const caller = createCaller({});
-  const data = await caller.greeting1();
+  const data = await caller.greeting2({ name: "テスト" });
+
+  // const { data: postsData } = await caller.getPosts();
 
   return (
     <div className="">

@@ -2,6 +2,12 @@ import { z } from "zod";
 
 import { callerFactory, procedure, router } from "./trpc";
 
+// TODO:型を当てたい
+type Post = {
+  id: number;
+  title: string;
+};
+
 // routerを使用してエンドポイントを定義
 // procedureを使用して処理を実装する
 export const appRouter = router({
@@ -17,8 +23,6 @@ export const appRouter = router({
     return res.json();
   }),
 });
-
-const getPosts = async () => {};
 
 export type AppRouter = typeof appRouter;
 
