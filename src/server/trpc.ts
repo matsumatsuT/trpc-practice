@@ -1,5 +1,4 @@
 import { initTRPC } from "@trpc/server";
-import { appRouter } from ".";
 
 // trpcの初期化（一つのプロダクトに一度だけ実行）
 const t = initTRPC.create();
