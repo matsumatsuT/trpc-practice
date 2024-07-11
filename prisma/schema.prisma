@@ -13,9 +13,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model TodoList {
   id      Int     @id @default(autoincrement())
-  name    String
-  age     Int
-  comment String?
+  title   String
+  content String?
+  isDone  Boolean @default(false)
 }
