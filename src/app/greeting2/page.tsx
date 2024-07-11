@@ -1,8 +1,8 @@
-import { createCaller } from "@/server";
+import { createCaller } from "@/server/router/index"
 
 const GreeTing2 = async () => {
-  const caller = createCaller({});
-  const data = await caller.greeting2({ name: "テスト" });
+  const caller = createCaller({})
+  const data = await caller.greeting.greeting2({ name: "テスト" })
 
   return (
     <div className="">
@@ -11,7 +11,7 @@ const GreeTing2 = async () => {
         <div>{data.msg}</div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default GreeTing2;
+export default GreeTing2
