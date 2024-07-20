@@ -8,6 +8,7 @@ export default function Home() {
       <Greeting1 />
       <hr />
       <Greeting2 />
+      <hr />
       <TodoList />
     </>
   )
