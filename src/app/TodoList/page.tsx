@@ -1,5 +1,7 @@
 "use client"
 import { clientApi } from "@/app/_trpc/client-api"
+import { CreateForm } from "@/components/todo/createForm"
+import { useForm } from "react-hook-form"
 import styled from "styled-components"
 
 const TodoList = () => {
@@ -8,13 +10,8 @@ const TodoList = () => {
   return (
     <Wrapper>
       <Title>TODOリスト</Title>
-      <form action="">
-        <input type="text" placeholder="タイトル" />
-        <div>
-          <input type="text" placeholder="備考" />
-        </div>
-        <button type="button">登録</button>
-      </form>
+
+      <CreateForm />
       <ul>
         {data?.map((todo) => (
           <Item key={todo.id}>
