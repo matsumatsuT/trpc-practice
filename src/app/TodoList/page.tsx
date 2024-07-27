@@ -1,21 +1,30 @@
 "use client"
 import { clientApi } from "@/app/_trpc/client-api"
 import { CreateForm } from "@/components/todo/createForm"
+import { UpdateDoneInput } from "@/server/router/todoList"
 import { QueryObserverResult } from "@tanstack/react-query"
-import { TRPCClientErrorLike } from "@trpc/client"
-import { DefaultErrorShape } from "@trpc/server/unstable-core-do-not-import"
-import { useForm } from "react-hook-form"
 import styled from "styled-components"
-
-type Todo = {
-  title: string
-  content: string | null
-  id: number
-  isDone: boolean
-}
 
 const TodoList = () => {
   const { data, refetch } = clientApi.todoList.getAll.useQuery()
+
+  const updateDoneMutation = clientApi.todoList.updateDone.useMutation()
+
+  const onUpdateDone = (values: UpdateDoneInput) => {
+    updateDoneMutation.mutate(
+      {
+        id: values.id,
+        isDone: changeDone(values.isDone),
+      },
+      {
+        onSettled: () => refetch(),
+      }
+    )
+  }
+
+  const changeDone = (currentDone: boolean) => {
+    return !currentDone
+  }
 
   return (
     <Wrapper>
@@ -27,9 +36,11 @@ const TodoList = () => {
           <Item key={todo.id}>
             <Text16>{todo.title}</Text16>
             <Text12>{todo.content}</Text12>
-
-            {/* isDoneの実装をする */}
-            <input type="checkbox" checked={todo.isDone} />
+            <input
+              type="checkbox"
+              defaultChecked={todo.isDone}
+              onClick={() => onUpdateDone({ id: todo.id, isDone: todo.isDone })}
+            />
           </Item>
         ))}
       </ul>
