@@ -2,6 +2,17 @@ import { clientApi } from "@/app/_trpc/client-api"
 import { AddTodoInput } from "@/server/router/todoList"
 import { FormProvider, useForm } from "react-hook-form"
 
+const getErrorMessage = (errorType: string, value?: number) => {
+  switch (errorType) {
+    case "maxLength":
+      return `文字数は${value}文字までです`
+    case "required":
+      return "入力必須です"
+    default:
+      return ""
+  }
+}
+
 type createFormValues = AddTodoInput
 
 export const CreateForm = () => {
@@ -11,7 +22,11 @@ export const CreateForm = () => {
       content: "",
     },
   })
-  const { register, handleSubmit } = methods
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = methods
 
   const { mutate } = clientApi.todoList.add.useMutation()
 
@@ -31,14 +46,11 @@ export const CreateForm = () => {
         <input
           type="text"
           placeholder="タイトル"
-          {...register("title", { required: true, max: 20 })}
+          {...register("title", { required: "入力必須です", max: 20 })}
         />
+        {errors.title && getErrorMessage(errors.title.type)}
         <div>
-          <input
-            type="text"
-            placeholder="備考"
-            {...register("content", { max: 100 })}
-          />
+          <input type="text" placeholder="備考" {...register("content")} />
         </div>
         <button type="submit">登録</button>
       </form>

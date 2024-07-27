@@ -5,9 +5,9 @@ import Greeting2 from "./greeting2/page"
 export default function Home() {
   return (
     <>
-      <Greeting1 />
+      {/* <Greeting1 /> */}
       <hr />
-      <Greeting2 />
+      {/* <Greeting2 /> */}
       <hr />
       <TodoList />
     </>
