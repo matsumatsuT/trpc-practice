@@ -1,8 +1,7 @@
-import { httpBatchLink } from "@trpc/client";
+import { httpBatchLink } from "@trpc/client"
 
-import { appRouter } from "@/server";
-import { router } from "@/server/trpc";
-import { createServerSideHelpers } from "@trpc/react-query/server";
+import { router } from "@/server/trpc"
+import { createServerSideHelpers } from "@trpc/react-query/server"
 
 // https://trpc.io/docs/server/context
 // server側うまく動かない
