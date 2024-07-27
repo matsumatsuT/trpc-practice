@@ -29,7 +29,7 @@ const TodoList = () => {
             <Text12>{todo.content}</Text12>
 
             {/* isDoneの実装をする */}
-            <input type="checkbox" />
+            <input type="checkbox" checked={todo.isDone} />
           </Item>
         ))}
       </ul>

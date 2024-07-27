@@ -9,7 +9,11 @@ const addTodoInput = z.object({
 
 export const todoListRouter = router({
   getAll: procedure.query(async () => {
-    const todoList = await prisma.todoList.findMany()
+    const todoList = await prisma.todoList.findMany({
+      orderBy: {
+        id: "asc",
+      },
+    })
     return todoList
   }),
   add: procedure.input(addTodoInput).mutation(async ({ input }) => {
