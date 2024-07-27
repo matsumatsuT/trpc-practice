@@ -1,5 +1,5 @@
 import { clientApi } from "@/app/_trpc/client-api"
-import { AddTodoInput } from "@/server/router/todoList"
+import { AddInput } from "@/server/router/todoList"
 import { QueryObserverResult } from "@tanstack/react-query"
 import { FormProvider, useForm } from "react-hook-form"
 
@@ -14,7 +14,7 @@ const getErrorMessage = (errorType: string, value?: number) => {
   }
 }
 
-type createFormValues = AddTodoInput
+type createFormValues = AddInput
 
 type CreateFormProps = {
   refetch: QueryObserverResult["refetch"]

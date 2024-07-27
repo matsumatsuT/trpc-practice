@@ -2,7 +2,7 @@ import { prisma } from "@/server/prisma"
 import { procedure, router } from "@/server/trpc"
 import { z } from "zod"
 
-const addTodoInput = z.object({
+const addInput = z.object({
   title: z.string().max(20),
   content: z.string().optional(),
 })
@@ -20,7 +20,7 @@ export const todoListRouter = router({
     })
     return todoList
   }),
-  add: procedure.input(addTodoInput).mutation(async ({ input }) => {
+  add: procedure.input(addInput).mutation(async ({ input }) => {
     const post = await prisma.todoList.create({
       data: {
         title: input.title,
@@ -41,5 +41,6 @@ export const todoListRouter = router({
     return update
   }),
 })
-export type AddTodoInput = z.infer<typeof addTodoInput>
+
+export type AddInput = z.infer<typeof addInput>
 export type UpdateDoneInput = z.infer<typeof updateDoneInput>
