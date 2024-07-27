@@ -1,5 +1,6 @@
 import { clientApi } from "@/app/_trpc/client-api"
 import { AddTodoInput } from "@/server/router/todoList"
+import { QueryObserverResult } from "@tanstack/react-query"
 import { FormProvider, useForm } from "react-hook-form"
 
 const getErrorMessage = (errorType: string, value?: number) => {
@@ -15,7 +16,11 @@ const getErrorMessage = (errorType: string, value?: number) => {
 
 type createFormValues = AddTodoInput
 
-export const CreateForm = () => {
+type CreateFormProps = {
+  refetch: QueryObserverResult["refetch"]
+}
+
+export const CreateForm = ({ refetch }: CreateFormProps) => {
   const methods = useForm<createFormValues>({
     defaultValues: {
       title: "",
@@ -25,6 +30,7 @@ export const CreateForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = methods
 
@@ -33,11 +39,18 @@ export const CreateForm = () => {
   // 登録処理
   const onClick = (values: createFormValues) => {
     console.log("values", values)
-    return
-    mutate({
-      title: values.title,
-      content: values.content,
-    })
+    mutate(
+      {
+        title: values.title,
+        content: values.content,
+      },
+      {
+        onSettled: () => {
+          reset()
+          refetch()
+        },
+      }
+    )
   }
 
   return (

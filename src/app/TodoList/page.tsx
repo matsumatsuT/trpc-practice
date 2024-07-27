@@ -1,17 +1,27 @@
 "use client"
 import { clientApi } from "@/app/_trpc/client-api"
 import { CreateForm } from "@/components/todo/createForm"
+import { QueryObserverResult } from "@tanstack/react-query"
+import { TRPCClientErrorLike } from "@trpc/client"
+import { DefaultErrorShape } from "@trpc/server/unstable-core-do-not-import"
 import { useForm } from "react-hook-form"
 import styled from "styled-components"
 
+type Todo = {
+  title: string
+  content: string | null
+  id: number
+  isDone: boolean
+}
+
 const TodoList = () => {
-  const { data } = clientApi.todoList.getAll.useQuery()
+  const { data, refetch } = clientApi.todoList.getAll.useQuery()
 
   return (
     <Wrapper>
       <Title>TODOリスト</Title>
 
-      <CreateForm />
+      <CreateForm refetch={refetch as QueryObserverResult["refetch"]} />
       <ul>
         {data?.map((todo) => (
           <Item key={todo.id}>
