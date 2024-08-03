@@ -5,11 +5,6 @@ import { httpBatchLink } from "@trpc/client"
 import { clientApi } from "./client-api"
 import { useState } from "react"
 
-const apiUrl =
-  process.env.NODE_ENV === "production"
-    ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/api/trpc` ?? ""
-    : "http://localhost:3000/api/trpc"
-
 export default function Provider({ children }: { children: React.ReactNode }) {
   // コンポーネントがレンダリングされる度にインスタンスを生成するとパフォーマンスが落ちるため、useStateで定義する
   const [queryClient] = useState(() => new QueryClient({}))
