@@ -7,7 +7,7 @@ import { useState } from "react"
 
 const apiUrl =
   process.env.NODE_ENV === "production"
-    ? process.env.NEXT_PUBLIC_SUPABASE_URL ?? ""
+    ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/api/trpc` ?? ""
     : "http://localhost:3000/api/trpc"
 
 export default function Provider({ children }: { children: React.ReactNode }) {
@@ -17,7 +17,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
     clientApi.createClient({
       links: [
         httpBatchLink({
-          url: apiUrl,
+          url: "/api/trpc",
         }),
       ],
     })
